@@ -1,0 +1,19 @@
+Major/minor TODOS file/changelog reference for gavbt
+
+Silly Key:
+	[x] - Complete
+	[_] - Incomplete
+	[/] - Partially completed
+	[!] - Removed/deferred.
+
+0.1
+	[x] 'web 2.0' layout
+	[x] Show uploads latest date first
+	[x] Show projects
+	[x] Grab recent track data from last.fm
+	[_] Some sort of logging functionality
+
+0.2+
+	[_] Show revision numbers of each svn repo
+	[_] Do something with that fancy last.fm generated album art
+	...

@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-GB">
+	<head>
+		<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+		<title>http://gavin.brokentrain.net/</title>
+		<link rel="shortcut icon" href="favicon.ico" />
+		<link rel="icon" href="favicon.ico" />
+		<style type="text/css">
+			html * { padding:0; margin:0; }
+			body * { padding:10px 20px; }
+			body * * { padding:0; }
+			body { font:small sans-serif; background:#eee; }
+			body>div { border-bottom:1px solid #ddd; }
+			h1 { font-weight:bold; font-family: sans-serif; color:#FFF; margin-bottom:.4em; }
+			h1 span { font-size:60%; color:#666; font-weight:normal; }
+			#main { background:#f6f6f6; }
+			#main ul { margin: 0.5em 4em; }
+			#main ul li { font-family: monospace; list-style-type:square; }
+			#main ul a { color: #000 }
+			#header { background: #36393D; }
+			#explanation { background:#eee; border-bottom: 0px none; }
+		</style>
+	</head>
+	<body>
+		<div id="header">
+			<h1>welcome to web 2.0</h1>
+		</div>
+		<div id="main">
+			{% if index %}
+			<ul>
+				<li><a href="{{ index.LAST_FM.url }}">{{ index.LAST_FM.name }}</a> (last updated: {{ tracks.0.updated }})</li>
+				<ul>
+					{% for track in tracks %}
+					<li><a href="{{ track.link }}">{{ track.title }}</a></li>
+					{% endfor %}
+				</ul>
+				<li><a href="{{ index.PROJECTS.url }}">{{ index.PROJECTS.name }}</a></li>
+				<ul>
+					{% for dir in projects %}
+					<li><a href="{{ dir.2 }}">{{ dir.1 }}</a></li>
+					{% endfor %}
+				</ul>
+				<li><a href="{{ index.SVN.url }}">{{ index.SVN.name }}</a></li>
+				<li><a href="{{ index.UPLOAD.url }}">{{ index.UPLOAD.name }}</a></li>
+				<ul>
+					{% for file in uploads %}
+					<li><a href="{{ file.2 }}">{{ file.1 }}</a></li>
+					{% endfor %}
+				</ul>
+			</ul>
+			{% endif %}
+		</div>
+	</body>
+</html>

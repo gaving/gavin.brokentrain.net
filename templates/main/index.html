@@ -42,6 +42,11 @@
 					{% endfor %}
 				</ul>
 				<li><a href="{{ index.SVN.url }}">{{ index.SVN.name }}</a></li>
+				<ul>
+					{% for repo in svn %}
+					<li><a href="http://svn.brokentrain.net/{{ repo }}">{{ repo }}</a></li>
+					{% endfor %}
+				</ul>
 				<li><a href="{{ index.UPLOAD.url }}">{{ index.UPLOAD.name }}</a></li>
 				<ul>
 					{% for file in uploads %}

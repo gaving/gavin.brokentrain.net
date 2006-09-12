@@ -12,6 +12,7 @@ Silly Key:
 	[x] Show projects
 	[x] Grab recent track data from last.fm
 	[_] Some sort of logging functionality
+	[x] Icons for different mimetypes, repos, projects, etc.
 
 0.2+
 	[_] Show revision numbers of each svn repo

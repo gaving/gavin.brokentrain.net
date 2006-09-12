@@ -31,22 +31,19 @@ def index(request):
             'SVN' : {
                     'name' : 'svn',
                     'url' : 'http://svn.brokentrain.net/',
-                    'repodir' : 'svn',
+                    'repodir' : '../svn',
                     'items' : 5,
-                    'icon' : 'svn.png'
                 },
             'PROJECTS' : {
                     'name' : 'projects',
                     'url' : 'projects/',
                     'items' : 5,
-                    'icon' : 'project.png'
                 },
             'LAST_FM' : {
                     'name' : 'music',
                     'url' : 'http://www.last.fm/user/gaving',
                     'items' : 8,
                     'feed' : 'http://ws.audioscrobbler.com/1.0/user/gaving/recenttracks.rss',
-                    'icon' : 'track.png'
                 },
             'UPLOAD' : {
                     'name' : 'upload',

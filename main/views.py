@@ -1,28 +1,52 @@
 import os.path
-from feedparser import feedparser
+import re
+import feedparser
 from django.http import HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 
 def index(request):
     """ Entry point for the root of the site """
 
+    def get_image(filename):
+        images = re.compile(r'[\w\W]*.(jpg|png|gif)$')
+        audio = re.compile(r'[\w\W]*.(mp3|wav|ogg|flac)$')
+        text = re.compile(r'[\w\W]*.(txt|doc|pdf|dat)$')
+        video = re.compile(r'[\w\W]*.(mpg|avi|ogm|mpeg|mkv)$')
+        archive = re.compile(r'[\w\W]*.(tar|tar.gz|bz2|tar.bz2|tgz|rar|zip)$')
+
+        if images.match(filename):
+            return 'mime-image.png'
+        elif audio.match(filename):
+            return 'mime-audio.png'
+        elif text.match(filename):
+            return 'mime-text.png'
+        elif video.match(filename):
+            return 'mime-video.png'
+        elif archive.match(filename):
+            return 'mime-archive.png'
+        else:
+            return 'mime-unknown.png'
+
     index = {
             'SVN' : {
                     'name' : 'svn',
                     'url' : 'http://svn.brokentrain.net/',
-                    'repodir' : '../svn',
-                    'items' : 5
+                    'repodir' : 'svn',
+                    'items' : 5,
+                    'icon' : 'svn.png'
                 },
             'PROJECTS' : {
                     'name' : 'projects',
                     'url' : 'projects/',
-                    'items' : 5
+                    'items' : 5,
+                    'icon' : 'project.png'
                 },
             'LAST_FM' : {
                     'name' : 'music',
                     'url' : 'http://www.last.fm/user/gaving',
                     'items' : 8,
-                    'feed' : 'http://ws.audioscrobbler.com/1.0/user/gaving/recenttracks.rss'
+                    'feed' : 'http://ws.audioscrobbler.com/1.0/user/gaving/recenttracks.rss',
+                    'icon' : 'track.png'
                 },
             'UPLOAD' : {
                     'name' : 'upload',
@@ -50,7 +74,7 @@ def index(request):
     uploads = []
     for file in os.listdir(index['UPLOAD']['url']):
         fullpath = os.path.join(index['UPLOAD']['url'], file)
-        uploads.append((os.path.getatime(fullpath), file, fullpath))
+        uploads.append((os.path.getatime(fullpath), file, fullpath, get_image(file)))
 
     uploads.sort()
     uploads.reverse()
@@ -65,4 +89,4 @@ def index(request):
             'uploads' : uploads[:index['UPLOAD']['items']]
             })
 
-    # vim: set expandtab shiftwidth=4 softtabstop=4 textwidth=79:
+# vim: set expandtab shiftwidth=4 softtabstop=4 textwidth=79:

@@ -29,28 +29,37 @@
 		<div id="main">
 			{% if index %}
 			<ul>
-				<li><a href="{{ index.LAST_FM.url }}">{{ index.LAST_FM.name }}</a> (last updated: {{ tracks.0.updated }})</li>
+				<li><a href="{{ index.LAST_FM.url }}">{{ index.LAST_FM.name }}</a>
+				{% if tracks.0.updated %}(last updated: {{ tracks.0.updated }}){% endif %}</li>
 				<ul>
 					{% for track in tracks %}
-					<li><a href="{{ track.link }}">{{ track.title }}</a></li>
+					<li style="list-style-image: url(media/icons/track.png)">
+						<a href="{{ track.link }}">{{ track.title }}</a>
+					</li>
 					{% endfor %}
 				</ul>
 				<li><a href="{{ index.PROJECTS.url }}">{{ index.PROJECTS.name }}</a></li>
 				<ul>
 					{% for dir in projects %}
-					<li><a href="{{ dir.2 }}">{{ dir.1 }}</a></li>
+					<li style="list-style-image: url(media/icons/folder.png)">
+						<a href="{{ dir.2 }}">{{ dir.1 }}</a>
+					</li>
 					{% endfor %}
 				</ul>
 				<li><a href="{{ index.SVN.url }}">{{ index.SVN.name }}</a></li>
 				<ul>
 					{% for repo in svn %}
-					<li><a href="http://svn.brokentrain.net/{{ repo }}">{{ repo }}</a></li>
+					<li style="list-style-image: url(media/icons/repo.png)">
+						<a href="http://svn.brokentrain.net/{{ repo }}">{{ repo }}</a>
+					</li>
 					{% endfor %}
 				</ul>
 				<li><a href="{{ index.UPLOAD.url }}">{{ index.UPLOAD.name }}</a></li>
 				<ul>
 					{% for file in uploads %}
-					<li><a href="{{ file.2 }}">{{ file.1 }}</a></li>
+					<li {% if file.3 %}style="list-style-image: url(media/icons/{{ file.3 }})"{% endif %}>
+						<a href="{{ file.2 }}">{{ file.1 }}</a>
+					</li>
 					{% endfor %}
 				</ul>
 			</ul>

@@ -1,6 +1,6 @@
 import os.path
 import re
-import feedparser
+from feedparser import feedparser
 from django.http import HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 
@@ -48,7 +48,12 @@ def index(request):
             'UPLOAD' : {
                     'name' : 'upload',
                     'url' : 'upload/',
-                    'items' : 10
+                    'items' : 5
+                },
+            'BLOG' : {
+                    'name' : 'blog',
+                    'url' : 'blog/',
+                    'items' : 5
                 }
             }
 
@@ -63,7 +68,7 @@ def index(request):
     for file in os.listdir(index['PROJECTS']['url']):
         fullpath = os.path.join(index['PROJECTS']['url'], file)
         if os.path.isdir(fullpath):
-            projects.append((os.path.getctime(fullpath), file, fullpath))
+            projects.append((os.path.getmtime(fullpath), file, fullpath))
 
     projects.sort()
     projects.reverse()

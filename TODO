@@ -1,21 +1,33 @@
 Major/minor TODOS file/changelog reference for gavbt
 
 Silly Key:
-	[x] - Complete
-	[_] - Incomplete
-	[/] - Partially completed
-	[!] - Removed/deferred.
+    [x] - Complete
+    [_] - Incomplete
+    [/] - Partially completed
+    [!] - Removed/deferred.
 
-0.1
-	[x] 'web 2.0' layout
-	[x] Show uploads latest date first
-	[x] Show projects
-	[x] Grab recent track data from last.fm
-	[_] Some sort of logging functionality
-	[x] Icons for different mimetypes, repos, projects, etc.
-	[_] Device some smart way of sorting those svn links
+2.2+
 
-0.2+
-	[_] Show revision numbers of each svn repo
-	[_] Do something with that fancy last.fm generated album art
-	...
+    [_] Get custom filters working
+    [_] Some sort of logging functionality
+    [_] Show loved tracks on music e.g. http://jimmac.musichall.cz/i.php?i=banshee for love icon
+    [_] Do something with that fancy last.fm generated album art
+    [_] Fancy tooltip job to show extended information for everything
+    [_] Show flickr?
+    [_] Device some smart way of doing something with the svn data (module
+    needed here?)
+    ...
+
+2.0 (11 october 2008)
+    [x] Make a two column layout
+    [x] Show revision numbers of each svn repo
+    [x] Show blog roll
+    [x] Show tweet roll
+    [x] Show delicious
+
+2.0 (12 september 2006)
+    [x] 'web 2.0' layout
+    [x] Show uploads latest date first
+    [x] Show projects
+    [x] Show music from last fm
+    [x] Icons for different mimetypes, repos, projects, etc.

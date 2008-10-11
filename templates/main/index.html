@@ -1,82 +1,115 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-GB">
-	<head>
-		<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
-		<title>http://gavin.brokentrain.net/</title>
-		<link rel="shortcut icon" href="favicon.ico" />
-		<link rel="icon" href="favicon.ico" />
-		<style type="text/css">
-			html * { padding:0; margin:0; }
-			body * { padding:10px 20px; }
-			body * * { padding:0; }
-			body { font:small sans-serif; background:#eee; }
-			body>div { border-bottom:1px solid #ddd; }
-			h1 { font-weight:bold; font-family: sans-serif; color:#FFF; margin-bottom:.4em; }
-			h1 span { font-size:60%; color:#666; font-weight:normal; }
-			#main { background:#f6f6f6; }
-			#main ul { margin: 0.5em 4em; }
-			#main ul li { font-family: monospace; list-style-type:square; }
-			#main ul a { color: #000 }
-			#header { background: #36393D; }
-			#explanation { background:#eee; border-bottom: 0px none; }
-		</style>
-	</head>
-	<body>
-
-<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
-</script>
-<script type="text/javascript">
-_uacct = "UA-2522898-1";
-urchinTracker();
-</script>
-
-		<div id="header">
-			<h1>welcome to web 2.0</h1>
-		</div>
-		<div id="main">
-			{% if index %}
-			<ul>
-				<li><a href="{{ index.LAST_FM.url }}">{{ index.LAST_FM.name }}</a>
-					{% if tracks.0.updated %}(last updated: {{ tracks.0.updated }}){% endif %}
-					<ul>
-						{% for track in tracks %}
-						<li style="list-style-image: url(media/icons/track.png)">
-							<a href="{{ track.link }}">{{ track.title }}</a>
-						</li>
-						{% endfor %}
-					</ul>
-				</li>
-				<li><a href="{{ index.PROJECTS.url }}">{{ index.PROJECTS.name }}</a>
-					<ul>
-						{% for dir in projects %}
-						<li style="list-style-image: url(media/icons/folder.png)">
-							<a href="{{ dir.2 }}">{{ dir.1 }}</a>
-						</li>
-						{% endfor %}
-					</ul>
-				</li>
-				<li><a href="{{ index.SVN.url }}">{{ index.SVN.name }}</a>
-					<ul>
-						{% for repo in svn %}
-						<li style="list-style-image: url(media/icons/repo.png)">
-							
-							<a href="http://svn.brokentrain.net/{{ repo }}">{{ repo }}</a>
-						</li>
-						{% endfor %}
-					</ul>
-				</li>
-				<li><a href="{{ index.UPLOAD.url }}">{{ index.UPLOAD.name }}</a>
-					<ul>
-						{% for file in uploads %}
-						<li {% if file.3 %}style="list-style-image: url(media/icons/{{ file.3 }})"{% endif %}>
-							<a href="{{ file.2 }}">{{ file.1 }}</a>
-						</li>
-						{% endfor %}
-					</ul>
-				</li>
-			</ul>
-			{% endif %}
-		</div>
-	</body>
+    <head>
+        <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+        <title>http://gavin.brokentrain.net/</title>
+        <link rel="shortcut icon" href="favicon.ico" />
+        <link rel="icon" href="favicon.ico" />
+        <style type="text/css">
+            html * { padding:0; margin:0; }
+            body * { padding:10px 20px; }
+            body * * { padding:0; }
+            body { font:small sans-serif; background:#eee; }
+            body>div { border-bottom:1px solid #ddd; }
+            h1 { font-weight:bold; font-family: sans-serif; color:#FFF; margin-bottom:.4em; }
+            h1 span { font-size:60%; color:#666; font-weight:normal; }
+            #main { background:#f6f6f6; }
+            #main ul { margin: 0.5em 4em; }
+            #main ul li { font-family: monospace; list-style-type:square; padding: 1px }
+            #main ul a { color: #000 }
+            #header { background: #36393D; }
+            #right { position: absolute; float:left; left: 450px; top: 70px }
+        </style>
+        <script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            _uacct = "UA-2522898-1";
+            urchinTracker();
+        </script>
+        <div id="header">
+            <h1>welcome to web 2.1</h1>
+        </div>
+        <div id="main">
+            <div id="left">
+                <ul>
+                    <li><a href="{{ feeds.BLOG.url }}">{{ feeds.BLOG.name }}</a>
+                        {% if entries.0.updated %}(last: {{ entries.0.updated|date:"D, F j 'y"|lower }}){% endif %}
+                        <ul>
+                            {% for entry in entries %}
+                            <li style="list-style-image: url(media/icons/mime-text.png)">
+                                <a href="{{ entry.link }}">{{ entry.title|force_escape|lower }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li><a href="{{ feeds.DELICIOUS.url }}">{{ feeds.DELICIOUS.name }}</a>
+                        {% if bookmarks.0.updated %}(last: {{ bookmarks.0.updated|date:"D, F j 'y"|lower }}){% endif %}
+                        <ul>
+                            {% for bookmark in bookmarks %}
+                            <li style="list-style-image: url(media/icons/bookmark.png)">
+                                <a href="{{ bookmark.link }}">{{ bookmark.title|force_escape|lower }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li><a href="{{ feeds.LAST_FM.url }}">{{ feeds.LAST_FM.name }}</a>
+                        {% if tracks.0.updated %}(last: {{ tracks.0.updated|date:"D, F j 'y"|lower }}){% endif %}
+                        <ul>
+                            {% for track in tracks %}
+                            <li style="list-style-image: url(media/icons/track.png)">
+                                <a href="{{ track.link }}">{{ track.title|force_escape|lower }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li><a href="{{ feeds.TWITTER.url }}">{{ feeds.TWITTER.name }}</a>
+                        {% if tweets.0.updated %}(last: {{ tweets.0.updated|date:"D, F j 'y"|lower }}){% endif %}
+                        <ul>
+                            {% for tweet in tweets %}
+                            <li style="list-style-image: url(media/icons/tweet.png)">
+                                <a href="{{ tweet.link }}">{{ tweet.title|force_escape|lower }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div id="right">
+                {% if index %}
+                <ul>
+                    <li><a href="{{ index.PROJECTS.url }}">{{ index.PROJECTS.name }}</a>
+                        <ul>
+                            {% for dir in projects %}
+                            <li style="list-style-image: url(media/icons/folder.png)">
+                                <a href="{{ dir.2 }}">{{ dir.1 }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li><a href="{{ index.SVN.url }}">{{ index.SVN.name }}</a>
+                        <ul>
+                            {% for repo in svn %}
+                            <li style="list-style-image: url(media/icons/repo.png)">
+                                <a href="http://svn.brokentrain.net/{{ repo }}">{{ repo }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li><a href="{{ index.UPLOAD.url }}">{{ index.UPLOAD.name }}</a>
+                        <ul>
+                            {% for file in uploads %}
+                            <li {% if file.3 %}style="list-style-image: url(media/icons/{{ file.3 }})"{% endif %}>
+                                <a href="{{ file.2 }}">{{ file.1 }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </body>
 </html>

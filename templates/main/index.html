@@ -30,27 +30,17 @@
             urchinTracker();
         </script>
         <div id="header">
-            <h1>welcome to web 2.1</h1>
+            <h1>welcome to web 2.1.1 (bugfix)</h1>
         </div>
         <div id="main">
             <div id="left">
                 <ul>
-                    <li><a href="{{ feeds.BLOG.url }}">{{ feeds.BLOG.name }}</a>
-                        {% if entries.0.updated %}(last: {{ entries.0.updated|date:"D, F j 'y"|lower }}){% endif %}
+                    <li><a href="{{ feeds.TWITTER.url }}">{{ feeds.TWITTER.name }}</a>
+                        {% if tweets.0.updated %}(last: {{ tweets.0.updated|date:"D, F j 'y"|lower }}){% endif %}
                         <ul>
-                            {% for entry in entries %}
-                            <li style="list-style-image: url(media/icons/mime-text.png)">
-                                <a href="{{ entry.link }}">{{ entry.title|force_escape|lower }}</a>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </li>
-                    <li><a href="{{ feeds.DELICIOUS.url }}">{{ feeds.DELICIOUS.name }}</a>
-                        {% if bookmarks.0.updated %}(last: {{ bookmarks.0.updated|date:"D, F j 'y"|lower }}){% endif %}
-                        <ul>
-                            {% for bookmark in bookmarks %}
-                            <li style="list-style-image: url(media/icons/bookmark.png)">
-                                <a href="{{ bookmark.link }}">{{ bookmark.title|force_escape|lower }}</a>
+                            {% for tweet in tweets %}
+                            <li style="list-style-image: url(media/icons/tweet.png)">
+                                <a href="{{ tweet.link }}">{{ tweet.title|force_escape|lower }}</a>
                             </li>
                             {% endfor %}
                         </ul>
@@ -65,12 +55,12 @@
                             {% endfor %}
                         </ul>
                     </li>
-                    <li><a href="{{ feeds.TWITTER.url }}">{{ feeds.TWITTER.name }}</a>
-                        {% if tweets.0.updated %}(last: {{ tweets.0.updated|date:"D, F j 'y"|lower }}){% endif %}
+                    <li><a href="{{ feeds.DELICIOUS.url }}">{{ feeds.DELICIOUS.name }}</a>
+                        {% if bookmarks.0.updated %}(last: {{ bookmarks.0.updated|date:"D, F j 'y"|lower }}){% endif %}
                         <ul>
-                            {% for tweet in tweets %}
-                            <li style="list-style-image: url(media/icons/tweet.png)">
-                                <a href="{{ tweet.link }}">{{ tweet.title|force_escape|lower }}</a>
+                            {% for bookmark in bookmarks %}
+                            <li style="list-style-image: url(media/icons/bookmark.png)">
+                                <a href="{{ bookmark.link }}">{{ bookmark.title|force_escape|lower }}</a>
                             </li>
                             {% endfor %}
                         </ul>

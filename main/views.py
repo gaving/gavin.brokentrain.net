@@ -9,7 +9,6 @@ import time
 def index(request):
     """ Entry point for the root of the site """
 
-
     def get_nice_feed(url):
         parsed_feed = feedparser.parse(url)
         feed = [
@@ -51,12 +50,6 @@ def index(request):
             return value[:arg] + '...'
 
     index = {
-            'SVN' : {
-                    'name' : 'svn',
-                    'url' : 'http://svn.brokentrain.net/',
-                    'repodir' : 'svn',
-                    'items' : 5,
-                },
             'PROJECTS' : {
                     'name' : 'projects',
                     'url' : 'projects/',
@@ -82,6 +75,12 @@ def index(request):
                     'items' : 5,
                     'feed' : 'http://gavin.brokentrain.net/blog/feed/',
                 },
+            'GIT' : {
+                    'name' : 'git',
+                    'url' : 'http://github.com/gaving.atom',
+                    'items' : 10,
+                    'feed' : 'http://github.com/gaving.atom',
+                },
             'TWITTER' : {
                     'name' : 'tweets',
                     'url' : 'http://twitter.com/vesech',
@@ -95,13 +94,6 @@ def index(request):
                     'feed' : 'http://feeds.delicious.com/v2/rss/vesech?count=15',
                 },
             }
-
-    repos = []
-    for file in os.listdir(index['SVN']['repodir']):
-        fullpath = os.path.join(index['SVN']['repodir'], file)
-        if os.path.isdir(fullpath):
-            repos.append(file)
-    repos.sort()
 
     projects = []
     for file in os.listdir(index['PROJECTS']['url']):
@@ -120,21 +112,20 @@ def index(request):
     uploads.sort()
     uploads.reverse()
 
-    entries = get_nice_feed(feeds['BLOG']['feed'])
-    tracks = get_nice_feed(feeds['LAST_FM']['feed'])
-    tweets = get_nice_feed(feeds['TWITTER']['feed'])
+    entries   = get_nice_feed(feeds['BLOG']['feed'])
+    git       = get_nice_feed(feeds['GIT']['feed'])
+    tracks    = get_nice_feed(feeds['LAST_FM']['feed'])
+    tweets    = get_nice_feed(feeds['TWITTER']['feed'])
     bookmarks = get_nice_feed(feeds['DELICIOUS']['feed'])
 
     return render_to_response('main/index.html', {
-                'index': index,
-                'feeds': feeds,
-                'svn' : repos,
-                'projects' : projects[:index['PROJECTS']['items']],
-                'uploads' : uploads[:index['UPLOAD']['items']],
-                'entries' : entries[:feeds['BLOG']['items']],
-                'tracks' : tracks[:feeds['LAST_FM']['items']],
-                'tweets' : tweets[:feeds['TWITTER']['items']],
-                'bookmarks' : bookmarks[:feeds['DELICIOUS']['items']]
-            })
-
-# vim: set expandtab shiftwidth=4 softtabstop=4 textwidth=79:
+        'index': index,
+        'feeds': feeds,
+        'projects' : projects[:index['PROJECTS']['items']],
+        'uploads' : uploads[:index['UPLOAD']['items']],
+        'git' : git[:feeds['GIT']['items']],
+        'entries' : entries[:feeds['BLOG']['items']],
+        'tracks' : tracks[:feeds['LAST_FM']['items']],
+        'tweets' : tweets[:feeds['TWITTER']['items']],
+        'bookmarks' : bookmarks[:feeds['DELICIOUS']['items']]
+    })

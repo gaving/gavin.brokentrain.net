@@ -30,16 +30,25 @@
             urchinTracker();
         </script>
         <div id="header">
-            <h1>welcome to web 2.1.1 (bugfix)</h1>
+            <h1>http://gavin.brokentrain.net/</h1>
         </div>
         <div id="main">
             <div id="left">
                 <ul>
+                    <li><a href="{{ index.GIT.url }}">{{ feeds.GIT.name }}</a>
+                        <ul>
+                            {% for repo in git %}
+                            <li style="list-style-image: url(/media/icons/repo.png)">
+                                <a href="{{ repo.link }}">{{ repo.title|force_escape|lower }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
                     <li><a href="{{ feeds.TWITTER.url }}">{{ feeds.TWITTER.name }}</a>
                         {% if tweets.0.updated %}(last: {{ tweets.0.updated|date:"D, F j 'y"|lower }}){% endif %}
                         <ul>
                             {% for tweet in tweets %}
-                            <li style="list-style-image: url(media/icons/tweet.png)">
+                            <li style="list-style-image: url(/media/icons/tweet.png)">
                                 <a href="{{ tweet.link }}">{{ tweet.title|force_escape|lower }}</a>
                             </li>
                             {% endfor %}
@@ -49,7 +58,7 @@
                         {% if tracks.0.updated %}(last: {{ tracks.0.updated|date:"D, F j 'y"|lower }}){% endif %}
                         <ul>
                             {% for track in tracks %}
-                            <li style="list-style-image: url(media/icons/track.png)">
+                            <li style="list-style-image: url(/media/icons/track.png)">
                                 <a href="{{ track.link }}">{{ track.title|force_escape|lower }}</a>
                             </li>
                             {% endfor %}
@@ -59,7 +68,7 @@
                         {% if bookmarks.0.updated %}(last: {{ bookmarks.0.updated|date:"D, F j 'y"|lower }}){% endif %}
                         <ul>
                             {% for bookmark in bookmarks %}
-                            <li style="list-style-image: url(media/icons/bookmark.png)">
+                            <li style="list-style-image: url(/media/icons/bookmark.png)">
                                 <a href="{{ bookmark.link }}">{{ bookmark.title|force_escape|lower }}</a>
                             </li>
                             {% endfor %}
@@ -73,17 +82,8 @@
                     <li><a href="{{ index.PROJECTS.url }}">{{ index.PROJECTS.name }}</a>
                         <ul>
                             {% for dir in projects %}
-                            <li style="list-style-image: url(media/icons/folder.png)">
+                            <li style="list-style-image: url(/media/icons/folder.png)">
                                 <a href="{{ dir.2 }}">{{ dir.1 }}</a>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </li>
-                    <li><a href="{{ index.SVN.url }}">{{ index.SVN.name }}</a>
-                        <ul>
-                            {% for repo in svn %}
-                            <li style="list-style-image: url(media/icons/repo.png)">
-                                <a href="http://svn.brokentrain.net/{{ repo }}">{{ repo }}</a>
                             </li>
                             {% endfor %}
                         </ul>
@@ -91,7 +91,7 @@
                     <li><a href="{{ index.UPLOAD.url }}">{{ index.UPLOAD.name }}</a>
                         <ul>
                             {% for file in uploads %}
-                            <li {% if file.3 %}style="list-style-image: url(media/icons/{{ file.3 }})"{% endif %}>
+                            <li {% if file.3 %}style="list-style-image: url(/media/icons/{{ file.3 }})"{% endif %}>
                                 <a href="{{ file.2 }}">{{ file.1 }}</a>
                             </li>
                             {% endfor %}

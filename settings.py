@@ -1,11 +1,12 @@
-# Django settings for gavbt project.
+# Django settings for gavin.brokentrain.net project.
+import os.path
 
+PROJECT_DIR = os.path.dirname(__file__)
+STATIC_DOC_ROOT = os.path.join(PROJECT_DIR, "static")
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-ADMINS = (
-         ('Gavin Gilmour', 'gavin.gilmour@gmail.com'),
-        )
+ADMINS = (('Gavin Gilmour', 'gavin.gilmour@gmail.com'),)
 
 MANAGERS = ADMINS
 
@@ -57,23 +58,14 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
         'django.middleware.common.CommonMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
-        'django.contrib.auth.middleware.AuthenticationMiddleware',
-        'django.middleware.doc.XViewMiddleware',
+        'django.contrib.auth.middleware.AuthenticationMiddleware'
         )
 
-ROOT_URLCONF = 'gavbt.urls'
-
-TEMPLATE_DIRS = (
-        # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-        # Always use forward slashes, even on Windows.
-        # Don't forget to use absolute paths, not relative paths.
-        '/mnt/media/coding/httpd/docroot/projects/django/gavbt/templates'
-        )
-
+ROOT_URLCONF = 'gbtdotnet.urls'
+TEMPLATE_DIRS = (os.path.join(PROJECT_DIR, "templates"),)
 INSTALLED_APPS = (
         'django.contrib.auth',
         'django.contrib.contenttypes',
         'django.contrib.sessions',
         'django.contrib.sites',
-        'gavbt.main'
         )

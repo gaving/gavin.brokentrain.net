@@ -6,7 +6,7 @@ STATIC_DOC_ROOT = os.path.join(PROJECT_DIR, "static")
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-ADMINS = (('Gavin Gilmour', 'gavin.gilmour@gmail.com'),)
+ADMINS = (('Gavin Gilmour', ''),)
 
 MANAGERS = ADMINS
 
